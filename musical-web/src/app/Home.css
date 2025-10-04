@@ -1,0 +1,130 @@
+.music-landing {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #0a0020;
+  background-image: linear-gradient(to right, #0a0020, #1a0040);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.music-landing__wrapper {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.music-landing__text-content {
+  flex: 1;
+  text-align: left;
+  padding-right: 2rem;
+}
+
+.music-landing__headline {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.music-landing__highlight {
+  color: #93a4ff;
+  font-size: 3rem;
+}
+
+.music-landing__description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  max-width: 450px;
+}
+
+.music-landing__buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.music-landing__button {
+  padding: 0.8rem 2rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.music-landing__button--primary {
+  background-color: #be4bdb;
+  color: white;
+}
+
+.music-landing__button--primary:hover {
+  background-color: #d170f0;
+  transform: translateY(-2px);
+}
+
+/* Add neon circuit effects */
+.music-landing::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTAwLDEwMCBMMjAwLDEwMCBMMjUwLDE1MCBMMzUwLDE1MCBMMzUwLDI1MCBMNDUwLDI1MCBMNTAwLDMwMCBMNjAwLDMwMCBMNjUwLDM1MCBMNzUwLDM1MCIgc3Ryb2tlPSIjYmU0YmRiIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48L3N2Zz4=');
+  background-size: contain;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.music-landing__card-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .music-landing__wrapper {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .music-landing__text-content {
+    padding-right: 0;
+    order: 1;
+  }
+  
+  .music-landing__card-container {
+    order: 0;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+  
+  .music-landing__headline {
+    font-size: 2.5rem;
+  }
+  
+  .music-landing__highlight {
+    font-size: 2rem;
+  }
+  
+  .music-landing__buttons {
+    justify-content: center;
+  }
+  
+  .music-landing__description {
+    margin: 0 auto 2rem;
+  }
+}

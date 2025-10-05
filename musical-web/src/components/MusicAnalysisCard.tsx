@@ -1,26 +1,20 @@
+// ==========================================
+// 4. MusicAnalysisCard Component
+// src/components/MusicAnalysisCard.tsx
+// ==========================================
+
+'use client';
+
 import React, { useState } from 'react';
-import './MusicAnalysisCard.css';
-
-interface OpenAIMessage {
-  role: 'system' | 'user' | 'assistant';
-  content: string;
-}
-
-interface OpenAIResponse {
-  choices: Array<{
-    message: {
-      content: string;
-    };
-  }>;
-}
+import styles from './MusicAnalysisCard.module.css';
 
 const MusicAnalysisCard: React.FC = () => {
-  const [songInput, setSongInput] = useState<string>('');
-  const [analysis, setAnalysis] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [hasAnalyzed, setHasAnalyzed] = useState<boolean>(false);
+  const [songInput, setSongInput] = useState('');
+  const [analysis, setAnalysis] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasAnalyzed, setHasAnalyzed] = useState(false);
 
-  const analyzeSong = async (): Promise<void> => {
+  const analyzeSong = async () => {
     if (!songInput.trim()) return;
     
     setIsLoading(true);
@@ -44,7 +38,7 @@ const MusicAnalysisCard: React.FC = () => {
               role: "user",
               content: `請分析這首歌曲：${songInput}`
             }
-          ] as OpenAIMessage[],
+          ],
           max_tokens: 500,
           temperature: 0.7
         })
@@ -54,7 +48,7 @@ const MusicAnalysisCard: React.FC = () => {
         throw new Error('API request failed');
       }
 
-      const data: OpenAIResponse = await response.json();
+      const data = await response.json();
       setAnalysis(data.choices[0].message.content);
       setHasAnalyzed(true);
     } catch (error) {
@@ -66,91 +60,67 @@ const MusicAnalysisCard: React.FC = () => {
     setIsLoading(false);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       analyzeSong();
     }
   };
 
-  const resetCard = (): void => {
+  const resetCard = () => {
     setSongInput('');
     setAnalysis('');
     setHasAnalyzed(false);
   };
 
-  const setSuggestion = (song: string): void => {
-    setSongInput(song);
-  };
-
   return (
-    <div className="music-analysis-card">
-      <div className="card-header">
+    <div className={styles.card}>
+      <div className={styles.cardHeader}>
         <h3>🎵 音樂理論探索器</h3>
         <p>輸入你喜歡的歌曲，讓 AI 告訴你可以學習哪些樂理知識！</p>
       </div>
       
-      <div className="card-content">
+      <div className={styles.cardContent}>
         {!hasAnalyzed ? (
-          <div className="input-section">
-            <div className="input-group">
+          <div className={styles.inputSection}>
+            <div className={styles.inputGroup}>
               <input
                 type="text"
                 value={songInput}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSongInput(e.target.value)}
+                onChange={(e) => setSongInput(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="例如：Fly Me to the Moon、Smells Like Teen Spirit、茉莉花..."
-                className="song-input"
+                className={styles.songInput}
                 disabled={isLoading}
               />
               <button 
                 onClick={analyzeSong}
                 disabled={isLoading || !songInput.trim()}
-                className="analyze-button"
-                type="button"
+                className={styles.analyzeButton}
               >
                 {isLoading ? (
-                  <div className="loading-spinner"></div>
+                  <div className={styles.loadingSpinner}></div>
                 ) : (
                   '分析'
                 )}
               </button>
             </div>
-            <div className="suggestions">
+            <div className={styles.suggestions}>
               <span>試試看：</span>
-              <button 
-                onClick={() => setSuggestion('Fly Me to the Moon')}
-                type="button"
-              >
-                Fly Me to the Moon
-              </button>
-              <button 
-                onClick={() => setSuggestion('Smells Like Teen Spirit')}
-                type="button"
-              >
-                Smells Like Teen Spirit
-              </button>
-              <button 
-                onClick={() => setSuggestion('茉莉花')}
-                type="button"
-              >
-                茉莉花
-              </button>
+              <button onClick={() => setSongInput('Fly Me to the Moon')}>Fly Me to the Moon</button>
+              <button onClick={() => setSongInput('Smells Like Teen Spirit')}>Smells Like Teen Spirit</button>
+              <button onClick={() => setSongInput('茉莉花')}>茉莉花</button>
             </div>
           </div>
         ) : (
-          <div className="analysis-section">
-            <div className="analysis-header">
+          <div className={styles.analysisSection}>
+            <div className={styles.analysisHeader}>
               <h4>🎼 「{songInput}」樂理分析</h4>
             </div>
-            <div className="analysis-content">
+            <div className={styles.analysisContent}>
               <p>{analysis}</p>
             </div>
-            <div className="card-actions">
-              <button 
-                onClick={resetCard} 
-                className="reset-button"
-                type="button"
-              >
+            <div className={styles.cardActions}>
+              <button onClick={resetCard} className={styles.resetButton}>
                 分析其他歌曲
               </button>
             </div>

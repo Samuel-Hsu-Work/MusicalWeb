@@ -1,13 +1,14 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
-// import { AuthProvider } from '@/contexts/AuthContext';
-import Navbar from '@/components/Navbar';
+// ==========================================
+// 1. Root Layout
+// src/app/layout.tsx
+// ==========================================
 
-const inter = Inter({ subsets: ['latin'] });
+import { AuthProvider } from '@/contexts/AuthContext';
+import './globals.css';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '3muel Hub - Music Learning Platform',
+  title: '3muel Hub - Music Theory Platform',
   description: 'Explore your music with 3muel Hub',
 };
 
@@ -18,15 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-TW">
-      <body className={inter.className}>
-        {/* <AuthProvider> */}
-          <div className="App">
-            <Navbar />
-            <main className="main-content">
-              {children}
-            </main>
-          </div>
-        {/* </AuthProvider> */}
+      <body>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

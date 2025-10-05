@@ -1,29 +1,31 @@
+// ==========================================
+// 2. Navbar Component
+// src/components/Navbar.tsx
+// ==========================================
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-// import { useAuth } from '@/contexts/AuthContext';
-import './Navbar.css';
+import { useAuth } from '@/contexts/AuthContext';
+import styles from './Navbar.module.css';
 
 const Navbar: React.FC = () => {
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { user, logout, isAuthenticated, loading } = useAuth();
   
-  // const { user, logout, isAuthenticated, loading } = useAuth();
-  
-  const toggleMenu = (): void => {
+  const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
   
-  const closeMenu = (): void => {
+  const closeMenu = () => {
     if (menuOpen) setMenuOpen(false);
   };
   
-  // const handleLogout = (): void => {
-  //   logout();
-  //   closeMenu();
-  // };
+  const handleLogout = () => {
+    logout();
+    closeMenu();
+  };
   
   useEffect(() => {
     if (menuOpen) {
@@ -37,84 +39,51 @@ const Navbar: React.FC = () => {
     };
   }, [menuOpen]);
 
-  // 當路徑改變時關閉菜單
-  useEffect(() => {
-    closeMenu();
-  }, [pathname]);
-
   return (
-    <nav className="navbar">
-      <div className="logo">
-        <div className="logo-circle"></div>
-        <span className="logo-text">3muel Hub</span>
+    <nav className={styles.navbar}>
+      <div className={styles.logo}>
+        <div className={styles.logoCircle}></div>
+        <span className={styles.logoText}>3muel Hub</span>
       </div>
       
       <div 
-        className={`menu-icon ${menuOpen ? 'menu-open' : ''}`} 
+        className={`${styles.menuIcon} ${menuOpen ? styles.menuOpen : ''}`} 
         onClick={toggleMenu}
-        role="button"
-        aria-label="Toggle menu"
-        aria-expanded={menuOpen}
       >
-        <div className="bar1"></div>
-        <div className="bar2"></div>
-        <div className="bar3"></div>
+        <div className={styles.bar1}></div>
+        <div className={styles.bar2}></div>
+        <div className={styles.bar3}></div>
       </div>
       
       <div 
-        className={`overlay ${menuOpen ? 'active' : ''}`} 
+        className={`${styles.overlay} ${menuOpen ? styles.active : ''}`} 
         onClick={closeMenu}
-        aria-hidden={!menuOpen}
       ></div>
       
-      <ul className={`nav-links ${menuOpen ? 'active' : ''}`}>
-        <li>
-          <Link href="/" onClick={closeMenu}>
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link href="/theory" onClick={closeMenu}>
-            Music Theory
-          </Link>
-        </li>
-        <li>
-          <Link href="/discussion" onClick={closeMenu}>
-            Discussion
-          </Link>
-        </li>
-        <li>
-          <Link href="/account" onClick={closeMenu}>
-            MyAccount
-          </Link>
-        </li>
-        <li>
-          <Link href="/contact" onClick={closeMenu}>
-            Contact
-          </Link>
-        </li>
+      <ul className={`${styles.navLinks} ${menuOpen ? styles.active : ''}`}>
+        <li><Link href="/" onClick={closeMenu}>Home</Link></li>
+        <li><Link href="/theory" onClick={closeMenu}>Music Theory</Link></li>
+        <li><Link href="/discussion" onClick={closeMenu}>Discussion</Link></li>
+        <li><Link href="/account" onClick={closeMenu}>MyAccount</Link></li>
+        <li><Link href="/contact" onClick={closeMenu}>Contact</Link></li>
       </ul>
       
-      {/* <div className="auth-section">
+      <div className={styles.authSection}>
         {loading ? (
-          <div className="loading-spinner" aria-label="Loading"></div>
+          <div className={styles.loadingSpinner}></div>
         ) : isAuthenticated() ? (
-          <div className="user-menu">
-            <span className="username">👤 {user?.username}</span>
-            <button 
-              className="logout-btn" 
-              onClick={handleLogout}
-              type="button"
-            >
+          <div className={styles.userMenu}>
+            <span className={styles.username}>👤 {user?.username}</span>
+            <button className={styles.logoutBtn} onClick={handleLogout}>
               登出
             </button>
           </div>
         ) : (
-          <Link href="/account" className="sign-in-btn">
+          <Link href="/account" className={styles.signInBtn}>
             Sign In
           </Link>
         )}
-      </div> */}
+      </div>
     </nav>
   );
 };

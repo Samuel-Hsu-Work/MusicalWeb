@@ -1,8 +1,3 @@
-// ==========================================
-// 4. MusicAnalysisCard Component
-// src/components/MusicAnalysisCard.tsx
-// ==========================================
-
 'use client';
 
 import React, { useState } from 'react';
@@ -32,11 +27,11 @@ const MusicAnalysisCard: React.FC = () => {
           messages: [
             {
               role: "system",
-              content: "你是一位很酷的音樂理論老師，會用有趣的方式分析音樂。請分析用戶提到的歌曲，並：1)指出該曲子的關鍵音樂特色（如調性、節拍、和弦進行、曲式結構等）2)用具體的技術細節說明為什麼這首歌好聽（例如：藍調的12小節結構、流行歌的I-V-vi-IV進行、搖滾的power chord等）3)建議學習哪些樂理知識能讓用戶更懂這類音樂，並暗示用戶可能對什麼風格有偏好。語調要輕鬆但專業，像在跟朋友聊音樂。用繁體中文，200字內。"
+              content: "你是一位很酷的音樂理論老師,會用有趣的方式分析音樂。請分析用戶提到的歌曲,並:1)指出該曲子的關鍵音樂特色(如調性、節拍、和弦進行、曲式結構等)2)用具體的技術細節說明為什麼這首歌好聽(例如:藍調的12小節結構、流行歌的I-V-vi-IV進行、搖滾的power chord等)3)建議學習哪些樂理知識能讓用戶更懂這類音樂,並暗示用戶可能對什麼風格有偏好。語調要輕鬆但專業,像在跟朋友聊音樂。用繁體中文,200字內。"
             },
             {
               role: "user",
-              content: `請分析這首歌曲：${songInput}`
+              content: `請分析這首歌曲:${songInput}`
             }
           ],
           max_tokens: 500,
@@ -53,7 +48,7 @@ const MusicAnalysisCard: React.FC = () => {
       setHasAnalyzed(true);
     } catch (error) {
       console.error('Error:', error);
-      setAnalysis('抱歉，分析過程中發生錯誤。請稍後再試。');
+      setAnalysis('抱歉,分析過程中發生錯誤。請稍後再試。');
       setHasAnalyzed(true);
     }
     
@@ -76,7 +71,7 @@ const MusicAnalysisCard: React.FC = () => {
     <div className={styles.card}>
       <div className={styles.cardHeader}>
         <h3>🎵 音樂理論探索器</h3>
-        <p>輸入你喜歡的歌曲，讓 AI 告訴你可以學習哪些樂理知識！</p>
+        <p>輸入你喜歡的歌曲,讓 AI 告訴你可以學習哪些樂理知識!</p>
       </div>
       
       <div className={styles.cardContent}>
@@ -88,7 +83,7 @@ const MusicAnalysisCard: React.FC = () => {
                 value={songInput}
                 onChange={(e) => setSongInput(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="例如：Fly Me to the Moon、Smells Like Teen Spirit、茉莉花..."
+                placeholder="例如:Fly Me to the Moon、Smells Like Teen Spirit、茉莉花..."
                 className={styles.songInput}
                 disabled={isLoading}
               />
@@ -105,7 +100,7 @@ const MusicAnalysisCard: React.FC = () => {
               </button>
             </div>
             <div className={styles.suggestions}>
-              <span>試試看：</span>
+              <span>試試看:</span>
               <button onClick={() => setSongInput('Fly Me to the Moon')}>Fly Me to the Moon</button>
               <button onClick={() => setSongInput('Smells Like Teen Spirit')}>Smells Like Teen Spirit</button>
               <button onClick={() => setSongInput('茉莉花')}>茉莉花</button>

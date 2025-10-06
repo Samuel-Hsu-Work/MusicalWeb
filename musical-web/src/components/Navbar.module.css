@@ -16,32 +16,32 @@
   align-items: center;
 }
 
-.logo-circle {
+.logoCircle {
   margin-right: 10px;
 }
 
-.logo-text {
+.logoText {
   font-size: 24px;
   font-weight: bold;
   color: white;
 }
 
-.nav-container {
+.navContainer {
   display: flex;
   align-items: center;
 }
 
-.nav-links {
+.navLinks {
   display: flex;
   list-style: none;
   margin-right: 30px;
 }
 
-.nav-links li {
+.navLinks li {
   padding: 0 15px;
 }
 
-.nav-links a {
+.navLinks a {
   text-decoration: none;
   color: white;
   font-size: 16px;
@@ -49,11 +49,46 @@
   transition: color 0.3s;
 }
 
-.nav-links a:hover {
+.navLinks a:hover {
   color: #ccc;
 }
 
-.sign-in-btn {
+.signInBtn {
+  background-color: #8844ff;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.signInBtn:hover {
+  background-color: #7733ee;
+}
+
+/* Auth Section */
+.authSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.userMenu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.username {
+  color: white;
+  font-size: 14px;
+}
+
+.logoutBtn {
   background-color: #8844ff;
   color: white;
   padding: 8px 20px;
@@ -64,19 +99,33 @@
   transition: background-color 0.3s;
 }
 
-.sign-in-btn:hover {
+.logoutBtn:hover {
   background-color: #7733ee;
 }
 
+.loadingSpinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* 漢堡菜單按鈕 */
-.menu-icon {
+.menuIcon {
   display: none;
   cursor: pointer;
   padding: 5px;
   z-index: 101;
 }
 
-.menu-icon div {
+.menuIcon div {
   width: 25px;
   height: 3px;
   background-color: white;
@@ -85,16 +134,41 @@
 }
 
 /* 當菜單打開時的漢堡圖標轉換 */
-.menu-open .bar1 {
+.menuOpen .bar1 {
   transform: rotate(-45deg) translate(-5px, 6px);
 }
 
-.menu-open .bar2 {
+.menuOpen .bar2 {
   opacity: 0;
 }
 
-.menu-open .bar3 {
+.menuOpen .bar3 {
   transform: rotate(45deg) translate(-5px, -6px);
+}
+
+.bar1,
+.bar2,
+.bar3 {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 99;
+}
+
+.overlay.active {
+  display: block;
 }
 
 @media (max-width: 768px) {
@@ -102,20 +176,20 @@
     padding: 0 20px;
   }
   
-  .nav-container {
+  .navContainer {
     flex-direction: column;
     position: absolute;
     width: 100%;
   }
   
-  .menu-icon {
+  .menuIcon {
     display: block;
     position: absolute;
     right: 20px;
     top: 23px;
   }
   
-  .nav-links {
+  .navLinks {
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -131,56 +205,48 @@
     z-index: 100;
   }
   
-  .nav-links.active {
+  .navLinks.active {
     right: 0;
   }
   
-  .nav-links li {
+  .navLinks li {
     padding: 15px;
     width: 100%;
     text-align: center;
   }
   
-  .nav-links a {
+  .navLinks a {
     font-size: 18px;
   }
   
-  .sign-in-btn {
+  .authSection {
     position: absolute;
     right: 60px;
     top: 18px;
-  }
-  
-  /* 當菜單打開時添加遮罩 */
-  .overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 99;
-  }
-  
-  .overlay.active {
-    display: block;
   }
 }
 
 /* 針對更小螢幕的調整 */
 @media (max-width: 480px) {
-  .sign-in-btn {
+  .signInBtn,
+  .logoutBtn {
     padding: 6px 15px;
     font-size: 14px;
+  }
+  
+  .authSection {
     right: 55px;
   }
   
-  .logo-text {
+  .logoText {
     font-size: 20px;
   }
   
-  .nav-links {
+  .navLinks {
     width: 85%;
   }
-}
+  
+  .username {
+    font-size: 12px;
+  }
+} 

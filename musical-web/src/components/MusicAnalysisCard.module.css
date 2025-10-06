@@ -1,0 +1,236 @@
+.card {
+  background: linear-gradient(135deg, rgba(190, 75, 219, 0.1), rgba(147, 164, 255, 0.1));
+  border: 1px solid rgba(190, 75, 219, 0.3);
+  border-radius: 16px;
+  padding: 2rem;
+  min-height: 400px;
+  max-height: 600px;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(190, 75, 219, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.card:hover {
+  border-color: rgba(190, 75, 219, 0.5);
+  box-shadow: 0 12px 40px rgba(190, 75, 219, 0.3);
+  transform: translateY(-2px);
+}
+
+.cardHeader {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.cardHeader h3 {
+  color: #93a4ff;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.cardHeader p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.cardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.inputSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.inputGroup {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.songInput {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid rgba(190, 75, 219, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.songInput:focus {
+  outline: none;
+  border-color: #be4bdb;
+  box-shadow: 0 0 0 3px rgba(190, 75, 219, 0.2);
+}
+
+.songInput::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.analyzeButton {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #be4bdb, #93a4ff);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.analyzeButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(190, 75, 219, 0.4);
+}
+
+.analyzeButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.loadingSpinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.suggestions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.suggestions span {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+}
+
+.suggestions button {
+  padding: 0.25rem 0.75rem;
+  background: rgba(190, 75, 219, 0.2);
+  border: 1px solid rgba(190, 75, 219, 0.4);
+  border-radius: 16px;
+  color: #93a4ff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.suggestions button:hover {
+  background: rgba(190, 75, 219, 0.3);
+  border-color: rgba(190, 75, 219, 0.6);
+}
+
+.analysisSection {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.analysisHeader {
+  margin-bottom: 1rem;
+}
+
+.analysisHeader h4 {
+  color: #93a4ff;
+  font-size: 1.2rem;
+  margin: 0;
+  text-align: center;
+}
+
+.analysisContent {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 1rem;
+  border: 1px solid rgba(190, 75, 219, 0.2);
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  max-height: 300px;
+}
+
+.analysisContent p {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.cardActions {
+  text-align: center;
+  margin-top: auto;
+}
+
+.resetButton {
+  padding: 0.5rem 1.5rem;
+  background: transparent;
+  border: 1px solid rgba(190, 75, 219, 0.5);
+  border-radius: 8px;
+  color: #93a4ff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.resetButton:hover {
+  background: rgba(190, 75, 219, 0.1);
+  border-color: #be4bdb;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .card {
+    padding: 1.5rem;
+    min-height: 350px;
+    max-height: 500px;
+  }
+  
+  .inputGroup {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .analyzeButton {
+    width: 100%;
+  }
+  
+  .suggestions {
+    justify-content: center;
+  }
+  
+  .cardHeader h3 {
+    font-size: 1.3rem;
+  }
+  
+  .cardHeader p {
+    font-size: 0.85rem;
+  }
+  
+  .analysisContent {
+    max-height: 200px;
+  }
+}
